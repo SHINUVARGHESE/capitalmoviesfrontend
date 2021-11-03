@@ -30,10 +30,10 @@ function RowPost() {
     }
     const manageMovie = (movieId) => {
         axios.post(`${serverurl}/findvideoid`, { id: movieId }).then((data) => {
-            if (data.data.youtubeVideoId.length !== 0) {
+            if(data.data.error){
+                console.log("no video");
+            }else  if (data.data.youtubeVideoId.length !== 0) {
                 setUrlId({ key: data.data.youtubeVideoId })
-            }else{
-                console.log("no youtube video");
             }
         })
     }
