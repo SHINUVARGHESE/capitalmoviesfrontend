@@ -3,12 +3,15 @@ import './RowPost.css'
 import { serverurl, imageurl } from '../../constants/constants'
 import YouTube from "react-youtube"
 import axios from 'axios'
-import {useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 
 function RowPost() {
     const [popularmovies, setPopularmovies] = useState([])
     const [trendingmovies, setTrendingmovies] = useState([])
+    const [modal, setModal] = useState(false);
     const [urlId, setUrlId] = useState({})
+    const [popupmovie,setPopupmovie] = useState()
     const category1 = "popularmovies"
     const category2 = "trendingmovies"
     const history = useHistory()
@@ -30,9 +33,9 @@ function RowPost() {
     }
     const manageMovie = (movieId) => {
         axios.post(`${serverurl}/findvideoid`, { id: movieId }).then((data) => {
-            if(data.data.error){
+            if (data.data.error) {
                 console.log(data.data.error);
-            }else  if (data.data.youtubeVideoId.length !== 0) {
+            } else if (data.data.youtubeVideoId.length !== 0) {
                 setUrlId({ key: data.data.youtubeVideoId })
             }
         })
@@ -57,6 +60,21 @@ function RowPost() {
         }
     }
 
+
+    const toggleModal = (title,discription,release,rating) => {
+        setModal(!modal);
+        const obj = {
+            title,discription,release,rating
+        }
+        setPopupmovie(obj)
+    };
+
+    if (modal) {
+        document.body.classList.add('active-modal')
+    } else {
+        document.body.classList.remove('active-modal')
+    }
+
     return (
         <div className='row'>
             <h1>Popularmovies</h1>
@@ -66,45 +84,63 @@ function RowPost() {
                     popularmovies.map((item, ky) => {
                         return (
                             <div className="card1">
-                                <h4 style={{ padding: "10px" }}>{item.title}</h4>
+                                <h4 style={{ padding: "10px" }}>{item.title}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
                                 <img onClick={() => { manageMovie(item.id) }} className="smallPoster" key={ky} src={`${imageurl + item.backdrop_path}`} />
                                 <div className='banner_buttons'>
                                     <button onClick={() => { addToFavorate(item.id, category1) }} className='button'>Add to favorate</button>
-                                  <a href="#popup1"> <button  className='button'>Overview</button></a>
-                                    <div style={{paddingBottom:"0"}} id="popup1" class="overlay">
-                                        <div style={{paddingBottom:"0"}} class="popup">
-                                            <h2 style={{paddingTop:"40px"}}>{item.title}</h2>
-                                            <a class="close" href="/" >&times;</a>
-                                            <div style={{color:"black", padding:"8px", paddingBottom:"0"}} class="content">{item.overview}
+                                    <button onClick={()=>{toggleModal(item.title, item.overview, item.release_date)}} className="button" >Overview</button>
+                                </div>
+                                {modal && (
+                                        <div className="modal"> 
+                                            <div onClick={toggleModal} className="overlay"></div>
+                                            <div className="modal-content">
+                                                <h2>{popupmovie.title}<span style={{paddingLeft:"15px"}}>({popupmovie.release})</span></h2>
+                                                <p>{popupmovie.discription}</p>
+                                                <button className="close-modal" onClick={toggleModal}>
+                                                    CLOSE
+                                                </button>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+                                    )}
                             </div>
 
                         )
                     })
+                    
                 }
+                
             </div>
             {urlId.key && <YouTube opts={opts} videoId={urlId.key} />}
             <h1>Trendingmovies</h1>
             <div className='posters'>
+               
                 {
                     trendingmovies.map((item, ky) => {
                         return (
                             <div className="card2">
-                                <h4 style={{ padding: "10px" }}>{item.title ? item.title : "Title"}</h4>
+                                <h4 style={{ padding: "10px" }}>{item.title}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
                                 <img onClick={() => { manageMovie(item.id) }} className="smallPoster" key={ky} src={`${imageurl + item.backdrop_path}`} />
                                 <div className='banner_buttons'>
-                                    <button onClick={() => { addToFavorate(item.id, category2) }} className='button'>Add to favorate</button>
-                                    <a href="#popup1"><button className='button'>Overview</button></a>
-
+                                    <button onClick={() => { addToFavorate(item.id, category1) }} className='button'>Add to favorate</button>
+                                    <button onClick={()=>{toggleModal(item.title, item.overview, item.release_date)}} className="button" >Overview</button>
                                 </div>
-
+                                {modal && (
+                                        <div className="modal"> 
+                                            <div onClick={toggleModal} className="overlay"></div>
+                                            <div className="modal-content">
+                                                <h2>{popupmovie.title}<span style={{paddingLeft:"15px"}}>({popupmovie.release})</span></h2>
+                                                <p>{popupmovie.discription}</p>
+                                                <button className="close-modal" onClick={toggleModal}>
+                                                    CLOSE
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                             </div>
 
                         )
                     })
+                    
                 }
             </div>
 
