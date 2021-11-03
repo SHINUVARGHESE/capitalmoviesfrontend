@@ -14,11 +14,7 @@ function NavBar() {
         if (data) {
             setUser(data.userData)
             axios.post(`${serverurl}/userfavorate`, { userid: data.userData.id }).then((data) => {
-                if(data.data){
                 setFavorateMovies(data.data.favoratemovies)
-                }else{
-                    setFavorateMovies(["no favoratemovies","no favoratemovies"])
-                }
             })
         } else {
             setUser({})
@@ -27,7 +23,7 @@ function NavBar() {
     return (
         <div className='navbar'>
             <h1 className="logo"><Link to="/">Capital Movies</Link></h1>
-            {/* <div style={{ marginLeft: "35%", color: "white" }}>{user ?
+            <div style={{ marginLeft: "35%", color: "white" }}>{favoratemovies ?
                 <div class="dropdown">
                     <button class="dropbtn"><h3>favorate</h3></button>
 
@@ -40,7 +36,7 @@ function NavBar() {
                             })
                         }
                     </div>
-                </div> : " "}</div> */}
+                </div> : " "}</div>
             <ui className="account">
                 <li>{user.username ?
                     <div class="dropdown">
