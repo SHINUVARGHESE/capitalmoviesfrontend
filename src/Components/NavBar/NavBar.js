@@ -7,7 +7,7 @@ import { serverurl } from '../../constants/constants'
 function NavBar() {
     const auth = <Link to="/signin">Signin</Link>
     const [user, setUser] = useState({})
-    const [favoratemovies, setFavorateMovies] = useState([])
+    const [favoratemovies, setFavorateMovies] = useState()
     const history = useHistory()
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('user'));
@@ -17,32 +17,36 @@ function NavBar() {
                 if(data.data.favoratemovies){
                 setFavorateMovies(data.data.favoratemovies)
                 }else{
-                    setFavorateMovies({})
+                    setFavorateMovies()
                 }
             })
         } else {
             setUser({})
-            setFavorateMovies({})
+            setFavorateMovies()
         }
     }, [])
+    console.log("fav");
     console.log(favoratemovies);
     return (
         <div className='navbar'>
             <h1 className="logo"><Link to="/">Capital Movies</Link></h1>
-            <div style={{ marginLeft: "35%", color: "white" }}>{favoratemovies[0] &&
+            <div style={{ marginLeft: "35%", color: "white" }}>{user.username &&
                 <div class="dropdown">
-                    <button class="dropbtn"><h3>favorate</h3></button>
+                    <button class="dropbtn"><h3>favorate</h3></button> 
                     <div class="dropdown-content">
                         {
-                            favoratemovies.map((item,ky) => {
+                           favoratemovies ? favoratemovies.map((item,ky) => {
                                 return (
                                     <a >{item.moviedata.title}</a>
                                 )
-                            })
+                            }) : <a>no movies</a>
                         }
                     </div>
-                </div> }
-            </div>
+               </div>
+                    
+                    }
+
+                </div> 
             <ui className="account">
                 <li>{user.username ?
                     <div class="dropdown">
