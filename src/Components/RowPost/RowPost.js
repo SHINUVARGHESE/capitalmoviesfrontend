@@ -87,7 +87,7 @@ function RowPost() {
                                 <h4 style={{ padding: "10px" }}>{item.title}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
                                 <img onClick={() => { manageMovie(item.id) }} className="smallPoster" key={ky} src={`${imageurl + item.backdrop_path}`} />
                                 <div className='banner_buttons'>
-                                    <button onClick={() => { addToFavorate(item.id, category1) }} className='button'>Add to favorate</button>
+                                    <button onClick={() => { addToFavorate(item.id, category1) }} className='button'> ❤️ Add to favorate</button>
                                     <button onClick={()=>{toggleModal(item.title, item.overview, item.release_date)}} className="button" >Overview</button>
                                 </div>
                                 {modal && (
@@ -121,7 +121,7 @@ function RowPost() {
                                 <h4 style={{ padding: "10px" }}>{item.title}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
                                 <img onClick={() => { manageMovie(item.id) }} className="smallPoster" key={ky} src={`${imageurl + item.backdrop_path}`} />
                                 <div className='banner_buttons'>
-                                    <button onClick={() => { addToFavorate(item.id, category1) }} className='button'>Add to favorate</button>
+                                    <button onClick={() => { addToFavorate(item.id, category1) }} className='button'> ❤️ Add to favorate</button>
                                     <button onClick={()=>{toggleModal(item.title, item.overview, item.release_date)}} className="button" >Overview</button>
                                 </div>
                                 {modal && (
