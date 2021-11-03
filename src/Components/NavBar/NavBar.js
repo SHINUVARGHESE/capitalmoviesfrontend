@@ -29,7 +29,7 @@ function NavBar() {
     return (
         <div className='navbar'>
             <h1 className="logo"><Link to="/">Capital Movies</Link></h1>
-            <div style={{ marginLeft: "35%", color: "white" }}>{favoratemovies[0] ?
+            <div style={{ marginLeft: "35%", color: "white" }}>{favoratemovies[0] &&
                 <div class="dropdown">
                     <button class="dropbtn"><h3>favorate</h3></button>
                     <div class="dropdown-content">
@@ -41,7 +41,7 @@ function NavBar() {
                             })
                         }
                     </div>
-                </div> : console.log("no movies")}
+                </div> }
             </div>
             <ui className="account">
                 <li>{user.username ?
