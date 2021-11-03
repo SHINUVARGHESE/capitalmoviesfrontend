@@ -14,7 +14,11 @@ function NavBar() {
         if (data) {
             setUser(data.userData)
             axios.post(`${serverurl}/userfavorate`, { userid: data.userData.id }).then((data) => {
+                if(data.data){
                 setFavorateMovies(data.data.favoratemovies)
+                }else{
+                    setFavorateMovies(["no favoratemovies"])
+                }
             })
         } else {
             setUser({})
