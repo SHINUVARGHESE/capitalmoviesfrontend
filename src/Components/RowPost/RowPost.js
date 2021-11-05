@@ -51,6 +51,7 @@ function RowPost() {
             axios.post(`${serverurl}/addtofavorate`, ids).then((data) => {
                 if (data.data.status) {
                     alert("Movie added to favorate")
+                    window.location.reload(false);
                 }
             }).catch(() => {
                 alert("Some went wrong ! can't add movie to favorate")

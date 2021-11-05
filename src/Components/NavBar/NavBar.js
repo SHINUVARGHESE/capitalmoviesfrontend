@@ -48,6 +48,8 @@ function NavBar() {
     axios.post(`${serverurl}/deletefavorate`,ids).then((data)=>{
        if(data.data.status){
            alert(" Movie deleted from favorate")
+           window.location.reload(false); 
+
        }
     })
   } else {
