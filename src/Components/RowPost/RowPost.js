@@ -94,10 +94,10 @@ function RowPost() {
                                         <div className="modal"> 
                                             <div onClick={toggleModal} className="overlay"></div>
                                             <div className="modal-content">
-                                                <h2>{popupmovie.title}<span style={{paddingLeft:"15px"}}>({popupmovie.release})</span></h2>
+                                                <h2>{popupmovie.title}<span style={{paddingLeft:"15px"}}>({popupmovie.release ? popupmovie.release : "0000-00-00"})</span></h2>
                                                 <p>{popupmovie.discription}</p>
-                                                <button className="close-modal" onClick={toggleModal}>
-                                                    CLOSE
+                                                <button style={{border:"none",cursor: "pointer"}} className="close-modal" onClick={toggleModal}>
+                                                ✖️
                                                 </button>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@ function RowPost() {
                     trendingmovies.map((item, ky) => {
                         return (
                             <div className="card2">
-                                <h4 style={{ padding: "10px" }}>{item.title}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
+                                <h4 style={{ padding: "10px" }}>{item.title ? item.title :  "Title"}<span style={{paddingLeft:"15px"}}>{item.vote_average} ⭐⭐⭐</span></h4>
                                 <img onClick={() => { manageMovie(item.id) }} className="smallPoster" key={ky} src={`${imageurl + item.backdrop_path}`} />
                                 <div className='banner_buttons'>
                                     <button onClick={() => { addToFavorate(item.id, category1) }} className='button'> ❤️ Add to favorate</button>
@@ -128,10 +128,10 @@ function RowPost() {
                                         <div className="modal"> 
                                             <div onClick={toggleModal} className="overlay"></div>
                                             <div className="modal-content">
-                                                <h2>{popupmovie.title}<span style={{paddingLeft:"15px"}}>({popupmovie.release})</span></h2>
+                                                <h2>{popupmovie.title ? popupmovie.title : "Title"}<span style={{paddingLeft:"15px"}}>({popupmovie.release ? popupmovie.release : "0000-00-00"})</span></h2>
                                                 <p>{popupmovie.discription}</p>
-                                                <button className="close-modal" onClick={toggleModal}>
-                                                    CLOSE
+                                                <button style={{border:"none",cursor: "pointer"}} className="close-modal" onClick={toggleModal}>
+                                                ✖️
                                                 </button>
                                             </div>
                                         </div>

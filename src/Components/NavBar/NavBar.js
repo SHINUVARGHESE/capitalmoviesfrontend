@@ -9,6 +9,8 @@ function NavBar() {
     const [user, setUser] = useState({})
     const [favoratemovies, setFavorateMovies] = useState()
     const history = useHistory()
+    const [modal, setModal] = useState(false);
+    const [popupmovie,setPopupmovie] = useState()
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem('user'));
         if (data) {
@@ -25,15 +27,24 @@ function NavBar() {
             setFavorateMovies()
         }
     }, [])
-    console.log("fav");
-    console.log(favoratemovies);
+
+    const toggleModal = () => {
+        setModal(!modal);
+    };
+
+    if (modal) {
+        document.body.classList.add('active-modal') 
+    } else {
+        document.body.classList.remove('active-modal')
+    }
+
     return (
         <div className='navbar'>
             <h1 className="logo"><Link to="/">Capital Movies</Link></h1>
             <div style={{ marginLeft: "35%", color: "white" }}>{user.username &&
-                <div class="dropdown">
-                    <button class="dropbtn"><h3>favorate</h3></button> 
-                    <div class="dropdown-content">
+                <div className="dropdown">
+                    <button className="dropbtn"><h3>Favorate</h3></button> 
+                    <div className="dropdown-content">
                         {
                            favoratemovies ? favoratemovies.map((item,ky) => {
                                 return (
@@ -45,7 +56,7 @@ function NavBar() {
                </div>
                     
                     }
-
+ 
                 </div> 
             <ui className="account">
                 <li>{user.username ?

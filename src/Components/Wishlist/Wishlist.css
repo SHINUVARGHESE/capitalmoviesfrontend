@@ -1,7 +1,3 @@
-.row{
-    margin-left: 20px;
-    color: #fff;
-}
 
 .posters{
     display: flex;
@@ -62,21 +58,13 @@
     padding-left: 6px;
 }
 
-.card1 {
+.card {
     padding-left:19px;
     padding-right:10px;
     padding-bottom: 10px;
     padding-top:5px;
     margin:5px;
-    background: linear-gradient(180deg,transparent,rgba(190, 124, 26, 0.808),rgb(98, 173, 68));
-}
-.card2 {
-    padding-left:19px;
-    padding-right:10px;
-    padding-bottom: 10px;
-    padding-top:5px;
-    margin:5px;
-    background: linear-gradient(180deg,transparent,rgba(152, 26, 190, 0.808),rgb(68, 173, 99));
+    background: linear-gradient(180deg,transparent,rgba(52, 102, 160, 0.993),rgba(245, 51, 51, 0.822));
 }
 
 
